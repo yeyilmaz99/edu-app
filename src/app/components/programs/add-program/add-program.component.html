@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <form [formGroup]="programAddForm" (ngSubmit)="submitForm()" class="mt-4">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="imageData" class="form-label">Image Data:</label>
+                    <input type="file" id="imageData" class="form-control" (change)="onFileSelected($event)"
+                        accept="image/*">
+                    <div *ngIf="programAddForm.get('imageData').invalid && programAddForm.get('imageData').touched"
+                        class="text-danger">
+                        Image data is required.
+                    </div>
+                    <!-- <img *ngIf="programAddForm.get('imageData').value" [src]="getProgramImageDataUrl()" alt="Image Data"
+                        width="100"> -->
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea class="form-control" formControlName="description"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="authorId" class="form-label">Author ID:</label>
+                    <input type="text" class="form-control" formControlName="authorId">
+                </div>
+
+                <div class="mb-3">
+                    <label for="authorName" class="form-label">Author Name:</label>
+                    <input type="text" class="form-control" formControlName="authorName">
+                </div>
+
+                <div formArrayName="questions">
+                    <div *ngFor="let question of questionForms.controls; let i = index" [formGroupName]="i"
+                        class="border p-3 mb-3">
+                        <div class="mb-3">
+                            <label for="questionHeader" class="form-label">Question Header:</label>
+                            <input type="text" class="form-control" formControlName="questionHeader">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="questionSubText" class="form-label">Question Subtext:</label>
+                            <input type="text" class="form-control" formControlName="questionSubText">
+                        </div>
+
+                        <div formArrayName="options">
+                            <div *ngFor="let option of getOptionsFormGroup(i).controls; let j = index"
+                                [formGroupName]="j" class="mb-2">
+                                <label for="options">Option:{{j}}</label>
+                                <input type="text" class="form-control" formControlName="opt">
+                                <button type="button" class="btn btn-danger" (click)="removeOption(i, j)">Remove
+                                    Option</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="answer" class="form-label">Answer:</label>
+                            <input type="text" class="form-control" formControlName="answer">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="imageData" class="form-label">Question Image:</label>
+                            <input type="file" class="form-control" formControlName="imageData" (change)="onQuestionImageChange($event, i)" accept="image/*">
+                            <!-- <img *ngIf="question.get('imageData').value !== null" [src]="getQuestionImageDataUrl(i)" alt="imageData" width="100"> -->
+                          </div>
+                          
+
+
+
+                        <button type="button" class="btn btn-primary me-2" (click)="addOptions(i)">Add Option</button>
+                        <button type="button" class="btn btn-danger" (click)="removeQuestion(i)">Remove
+                            Question</button>
+
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-success me-2" (click)="addQuestion()">Add Question</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!programAddForm.valid">Submit</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

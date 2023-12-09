@@ -1,0 +1,41 @@
+<!-- program.component.html -->
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <mat-card class="quiz-card mt-5" style="padding: 10px;">
+          <mat-card-header>
+            <mat-card-title>
+              Question : {{ currentQuestion.id }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <p class="mt-3" style="font-size: larger;">{{ currentQuestion.question }}</p>
+            <p class="mt-3"><strong >Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, quaerat.</strong></p>
+            <div class="row">
+              <mat-divider></mat-divider>
+              <mat-radio-group [(ngModel)]="selectedAnswer" [disabled]="isQuestionAnswered" class="mt-4">
+                <div class="row mt-2" *ngFor="let option of currentQuestion.options">
+                  <mat-radio-button class="example-radio-button"
+                                    [value]="option"
+                                    [ngClass]="{
+                                      'correct-answer': option === currentQuestion.answer && currentQuestion.correct,
+                                      'wrong-answer': option === selectedAnswer && currentQuestion.wrong
+                                    }">
+                    {{ option }}
+                  </mat-radio-button>
+                </div>
+            </mat-radio-group>
+          </div>
+          </mat-card-content>
+          <div class="row">
+            <mat-card-actions style="padding: 0px;">
+              <button (click)="submit()" *ngIf="!isLastQuestion()" style="float: right;" mat-raised-button color="primary">Next</button>
+            </mat-card-actions>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  

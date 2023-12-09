@@ -1,0 +1,24 @@
+
+body{
+    background-color: #f7f7f7;
+}
+
+
+.correct-answer {
+    /* Örnek olarak arka plan rengini mavi yapma */
+    background-color: green;
+    /* Ya da border ekleyerek vurgulama yapma */
+
+    /* Diğer stillendirmeler... */
+  }
+
+  .correct-answer {
+    /* Doğru cevabı vurgula, örneğin yeşil arka plan */
+    background-color: lightgreen;
+  }
+  
+  .wrong-answer {
+    border: 1px solid red;
+    /* Yanlış cevabı vurgula, örneğin kırmızı arka plan */
+    background-color: lightcoral;
+  }
